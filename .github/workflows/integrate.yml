@@ -26,5 +26,5 @@ jobs:
         run:  cp ".\myapp\*" -Destination "C:\inetpub\wwwroot\mywebsite" -recurse
 
       - name: remove clone
-        run:  .\myapp -r -force
+        run:  rm .\myapp -r -force
 
