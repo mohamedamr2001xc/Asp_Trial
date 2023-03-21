@@ -1,0 +1,20 @@
+﻿@model DancingGoat.Models.IMetadata
+@using Microsoft.AspNetCore.Http.Extensions;
+<meta name=”description” content="@Model.MetadataMetaDescription" />
+
+<meta property="og:title" content="@Model.MetadataOgTitle" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="@(UriHelper.BuildAbsolute(Context.Request.Scheme,
+                                                             Context.Request.Host,
+                                                             Context.Request.PathBase,
+                                                             Context.Request.Path,
+                                                             Context.Request.QueryString))" />
+<meta property="og:image" content="@(Model.MetadataOgImage?.FirstOrDefault()?.Url)" />
+<meta property="og:description" content="@Model.MetadataOgDescription" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Model.MetadataTwitterSite">
+<meta name="twitter:creator" content="@Model.MetadataTwitterCreator">
+<meta name="twitter:title" content="@Model.MetadataTwitterTitle">
+<meta name="twitter:description" content="@Model.MetadataOgDescription">
+<meta name="twitter:image" content="@(Model.MetadataTwitterImage?.FirstOrDefault()?.Url)">

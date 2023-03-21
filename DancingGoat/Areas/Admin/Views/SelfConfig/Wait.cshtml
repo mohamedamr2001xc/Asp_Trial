@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Sample Site—Configuration";
+}
+
+<header>
+    <div class="container">
+        <h1 class="headline-large">Waiting for the sample project to become ready...</h1>
+    </div>
+</header>
+@await Html.PartialAsync("~/Areas/Admin/Views/Shared/_MessagesPartial.cshtml")
+
+<script type="text/javascript">
+    function check() {
+        setTimeout(() => {
+            fetch("@Url.Action("SampleProjectReady")")
+                .then(response => response.json())
+                .then(json => {
+                    if (json) {
+                        window.location = "@Url.Action("Done")";
+                    } else {
+                        check();
+                    }
+                });
+        }, 2000);
+    }
+
+    check();
+</script>

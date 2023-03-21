@@ -1,0 +1,30 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: dontnet build
+        run: powershell
+
+      - name: dontnet build
+        run: dotnet build . --configuration Release
+
+      - name: dontnet publish
+        run: dotnet publish -c Release -o .\myapp
+
+      - name: remove old site
+        run: rm C:\inetpub\wwwroot\mywebsite\* -r -force
+
+      - name: copy new site
+        run:  cp ".\myapp\*" -Destination "C:\inetpub\wwwroot\mywebsite" -recurse
+
+      - name: remove clone
+        run:  .\myapp -r -force
+

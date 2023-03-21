@@ -1,0 +1,9 @@
+﻿@model DancingGoat.Models.AboutUsViewModel
+
+@{
+    ViewBag.Title = Localizer["AboutUs"];
+}
+
+@Html.DisplayForModel()
+
+<edit-panel content-item-id="@Model.ItemId" language="@Model.Language" />

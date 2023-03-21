@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "cdnjs",
+      "library": "twitter-bootstrap@5.1.3",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validate@1.19.5",
+      "destination": "wwwroot/lib/jquery-validate/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "modernizr@2.8.3",
+      "destination": "wwwroot/lib/modernizr/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "respond.js@1.4.2",
+      "destination": "wwwroot/lib/respond.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "less.js@4.1.3",
+      "destination": "wwwroot/lib/less.js/"
+    }
+  ]
+}

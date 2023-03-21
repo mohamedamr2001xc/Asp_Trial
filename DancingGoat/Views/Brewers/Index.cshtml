@@ -1,0 +1,28 @@
+﻿@model DancingGoat.Models.BrewersViewModel
+
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+    ViewBag.Title = Localizer["Brewers"];
+}
+
+<div class="product-page row">
+    <div class="flex">
+        <aside class="col-md-4 col-lg-3 product-filter">
+            @using (Html.BeginForm("Filter", "Brewers"))
+            {
+                @await Html.PartialAsync("BrewersFilter", Model.Filter)
+            }
+        </aside>
+
+        <div id="product-list" class="col-md-8 col-lg-9 product-list">
+            @await Html.PartialAsync("ProductListing", Model.Items)
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/formAutoPost.js"></script>
+    <script>
+        $(".js-postback input:checkbox").formAutoPost({ targetContainerSelector: "#product-list" });
+    </script>
+}

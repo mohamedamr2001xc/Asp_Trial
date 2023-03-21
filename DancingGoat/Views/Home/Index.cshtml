@@ -1,0 +1,97 @@
+﻿@model DancingGoat.Models.HomeViewModel
+@{
+    ViewBag.Title = Model.ContentItem.MetadataMetaTitle;
+}
+
+<section title="headers" id="head">
+    @await Html.PartialAsync("HeadersMetadata", Model.ContentItem)
+</section>
+
+
+@if (Model.Header != null)
+{
+    var image = Model.Header.Image.FirstOrDefault();
+    <section class="banner-section" style="background-image: url('@(image != null ? image.Url : "")');">
+        <h2 class="banner-heading">@Html.DisplayFor(vm => vm.Header.Title)</h2>
+        <div class="banner-text">
+            @Html.DisplayFor(vm => vm.Header.MarketingMessage)
+        </div>
+    </section>
+}
+
+<div class="row">
+    <h1 class="title-tab">@Localizer["Articles.LatestOne"]</h1>
+    @{var isFirstArticle = true; }
+    @foreach (DancingGoat.Models.Article article in @Model.ContentItem.Articles)
+    {
+        if (isFirstArticle)
+        {
+            isFirstArticle = false;
+            <div class="article-tile article-tile-large">
+                <div class="col-md-12 col-lg-6">
+                    <a asp-controller="Articles" asp-action="Show" asp-route-urlSlug="@article.UrlPattern">
+                        <img-asset asset="@article.TeaserImage.First()" class="article-tile-image" default-width="300">
+                            <media-condition min-width="1120" image-width="540" />
+                            <media-condition min-width="768" max-width="1120" image-width="736" />
+                            <media-condition min-width="330" max-width="768" image-width="468" />
+                        </img-asset>
+                    </a>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <div class="article-tile-date">
+                        @article.PostDate?.ToString("M")
+                    </div>
+                    <div class="article-tile-content">
+                        <h2>
+                            <a asp-controller="Articles" asp-action="Show" asp-route-urlSlug="@article.UrlPattern">@article.Title</a>
+                        </h2>
+                        <p class="article-tile-text lead-paragraph">
+                            @Html.DisplayFor(vm => article.Summary)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.DisplayFor(vm => article)
+        }
+    }
+</div>
+
+@await Html.PartialAsync("_MoreButtonPartial", new DancingGoat.Models.MoreButtonPartialViewModel { Text = Localizer["Articles.More"], Controller = "Articles", Action = "Index" })
+
+@foreach (DancingGoat.Models.FactAboutUs factAboutUs in Model.ContentItem.OurStory)
+{
+    var image = factAboutUs.Image.FirstOrDefault();
+    <div class="row">
+        <h1 class="title-tab">@factAboutUs.Title</h1>
+        <div class="col-sm-12">
+            <div class="ourstory-section center-text" style="background-image: url('@(image != null ? image.Url : "")');">
+                @Html.DisplayFor(vm => factAboutUs.Description)
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("_MoreButtonPartial", new DancingGoat.Models.MoreButtonPartialViewModel { Text = Localizer["Story.WholeStory"], Controller = "About", Action = "Index" })
+}
+
+<div class="row">
+    <div>
+        <h1 class="title-tab">@Localizer["CompanyCafes.Title"]</h1>
+    </div>
+    @foreach (DancingGoat.Models.Cafe cafe in Model.ContentItem.Cafes)
+    {
+        <div class="col-xs-6 col-md-3">
+            <div>
+                <a asp-controller="Cafes" asp-action="Index" class="ourcoffee-tile-link">
+                    <h2 class="ourcoffee-tile-text center-text">@cafe.System.Name</h2>
+                    <span class="cafe-overlay"> </span>
+                    <img-asset asset="@cafe.Photo.First()" class="ourcoffee-tile-image" default-width="270" />
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+@await Html.PartialAsync("_MoreButtonPartial", new DancingGoat.Models.MoreButtonPartialViewModel { Text = Localizer["Cafes.More"], Controller = "Cafes", Action = "Index" })

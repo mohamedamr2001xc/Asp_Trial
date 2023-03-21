@@ -1,0 +1,95 @@
+﻿@using DancingGoat.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Dancing Goat</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="page-wrap">
+        <header class="header" role="banner">
+            <div class="menu">
+                <div class="container">
+                    <nav role="navigation">
+                        <ul>
+                            <li>
+                                <a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Coffees" asp-action="Index">@Localizer["Store"]</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Articles" asp-action="Index">@Localizer["Articles"]</a>
+                            </li>
+                            <li>
+                                <a asp-controller="About" asp-action="Index">@Localizer["AboutUs"]</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Cafes" asp-action="Index">@Localizer["Cafes"]</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Contacts" asp-action="Index">@Localizer["Contact"]</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Partnership" asp-action="Index">@Localizer["Partnership"]</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="additional-menu-buttons user-menu">
+                        @await Component.InvokeAsync("LanguageSelector")
+                    </div>
+                </div>
+            </div>
+            <div id="message-box" class="container message">
+                <partial name="~/Areas/Admin/Views/Shared/_MessagesPartial.cshtml" />
+            </div>
+            <div class="header-row">
+                <div class="container">
+                    <div class="col-xs-8 col-md-8 col-lg-4 logo">
+                        <h1 class="logo">
+                            <a asp-controller="Home" asp-action="Index" class="logo-link">Dancing Goat</a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <div class="footer-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4 footer-col">
+                            <p>
+                                @await Component.InvokeAsync("CompanyAddress")
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-lg-4 footer-col">
+                            <h3>@Localizer["FollowUs.Title"]</h3>
+                            <a class="followus-link" href="https://www.facebook.com/Dancing.Goat" target="_blank">
+                                <img alt="@Localizer["FollowUsOnFacebook"]" class="" src="~/images/facebook-icon.png" title="@Localizer["FollowUsOnFacebook"]">
+                            </a>
+                            <a class="followus-link" href="https://twitter.com/DancingGoat78" target="_blank">
+                                <img alt="@Localizer["FollowUsOnTwitter"]" class="" src="~/images/twitter-icon.png" title="@Localizer["FollowUsOnTwitter"]">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container copyright">
+                Copyright &copy; @DateTime.Now.Year Dancing Goat. All rights reserved.
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

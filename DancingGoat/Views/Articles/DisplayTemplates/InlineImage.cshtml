@@ -1,0 +1,14 @@
+﻿@model Kontent.Ai.Delivery.Abstractions.IInlineImage
+<div class="article-inline-image">
+    <a href="@Model.Url" target="_blank">
+        <figure>
+            <img-asset asset="@Model" />
+        </figure>
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <div class="inline-image-title">
+                @Model.Description
+            </div>
+        }
+    </a>
+</div>
